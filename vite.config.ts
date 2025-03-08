@@ -6,10 +6,12 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 // 套件引入
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
+import VueRouter from 'unplugin-vue-router/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
+    VueRouter(),//必須放在vue()之前
     vue(),
     vueDevTools(),
     AutoImport({
@@ -32,10 +34,8 @@ export default defineConfig({
   css: {
     preprocessorOptions: {
       scss: {
-        additionalData: `
-          @use "sass:math";
-          @use "sass:color";
-        `,
+        additionalData: `@use '@/assets/scss/global-variables' as *;`,
+        quietDeps: true,
       },
     },
   },
